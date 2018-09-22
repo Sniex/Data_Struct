@@ -70,7 +70,7 @@ void quick_sort(int *num, int l, int r) {
     return ;
 }
 void quick_sort1(int *num, int l, int r) {
-    while (r - l < 1) {
+    while (r - l > 1) {
         int x = l, y = r, z = num[l];
         while (x < y) {
             while (x < y && num[y] >= z) --y;
@@ -86,7 +86,7 @@ void quick_sort1(int *num, int l, int r) {
 }
 
 void quick_sort2(int *num, int l, int r) {
-    while (r - l < 16) {
+    while (r - l > 16) {
         int x = l, y = r, z = num[l];
         while (x < y) {
             while (x < y && num[y] >= z) --y;
@@ -103,7 +103,7 @@ void quick_sort2(int *num, int l, int r) {
 }
 
 void quick_sort3(int *num, int l, int r) {
-    while (r - l < 1) {
+    while (r - l > 1) {
         int x = l, y = r, z = rand() % (r - l + 1) + l;
         swap(num[z], num[l]);
         z = num[l];
@@ -122,7 +122,7 @@ void quick_sort3(int *num, int l, int r) {
 }
 
 void quick_sort4(int *num, int l, int r) {
-    while (r - l < 16) {
+    while (r - l > 16) {
         int x = l, y = r, z = num[rand() % (r - l + 1) + l];
         do {
             while (num[x] < z) ++x;
