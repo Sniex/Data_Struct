@@ -26,10 +26,10 @@ typedef struct Node {
 int node_cnt = 0;
 
 Node *get_new_node() {
-    Node *p = (Node *)malloc(sizeof(Node));
-    // Node *p = (Node *)calloc(sizeof(Node), 1);
-    p->flag = 0;
-    memset(p->next, 0, sizeof(Node *) * BASE);
+    // Node *p = (Node *)malloc(sizeof(Node));
+    Node *p = (Node *)calloc(sizeof(Node), 1);
+    // p->flag = 0;
+    // memset(p->next, 0, sizeof(Node *) * BASE);
     node_cnt += 1;
     return p;
 }
@@ -66,7 +66,7 @@ int search(Trie root, const char *str) {
 }
 
 void get_random_string(char *str) {
-    int len = rand() % 10;
+    int len = rand() % 10 + 1;
     for (int i = 0; i < len; i++) str[i] = BEGIN_LETTER + rand() % BASE;
     str[len] = 0;
     return ;
@@ -104,7 +104,8 @@ int get_base(Node *node, DANode *data) {
     int base = 2, flag = 0;
     while (!flag) {
         flag = 1;
-        for (int i = 0; i < base; i++) {
+        for (int i = 0; i < BASE; i++) {
+            if (node->next[i] == NULL) continue;
             if (data[base + i].check == 0) continue;
             flag = 0;
             break;
@@ -143,7 +144,7 @@ int main() {
         world_cnt += strlen(str);
         printf("insert %s to Trie\n", str);
     }
-    // output(root, str, 0);    
+    output(root, str, 0);    
     DANode *data = (DANode *)calloc(sizeof(DANode), (INSERT_CNT * 100));
     int da_cnt = build(root, data, 1);
     output_da(data, str, 0, 1);
